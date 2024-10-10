@@ -30,7 +30,9 @@ export class Core {
 				description: repo.description || null,
 				language: repo.language || null,
 				stars: repo.stargazers_count,
-				link: repo.html_url
+				link: repo.html_url,
+				updated: formatDate(String(repo.updated_at)),
+				created: formatDate(String(repo.created_at)),
 			}))
 		} catch (error) {
 			console.error("Error:", error);
@@ -39,6 +41,10 @@ export class Core {
 
 	async getLanguages() {
 		try {
+			//use localStorage for reduce amount of requests
+			if (localStorage.getItem(`${this.username}-languages`)) {
+				return JSON.parse(localStorage.getItem(`${this.username}-languages`))
+			}
 			let languageStats = {};
 			if (this.repositories.length === 0) return null;
 
@@ -56,6 +62,7 @@ export class Core {
 					languageStats[language] += bytes;
 				}
 			});
+			localStorage.setItem(`${this.username}-languages`, JSON.stringify(languageStats))
 			return languageStats
 		} catch (error) {
 			console.error("Error:", error);

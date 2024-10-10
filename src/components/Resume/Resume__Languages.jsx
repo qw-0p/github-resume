@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 
-export const Languages = () => {
+export const Languages = ({languages}) => {
 	return (
 		<div>
 			{
-				Object.entries([]).map(([key, value]) => (
+				languages &&Object.entries(languages).map(([key, value]) => (
 					<div key={key}>
 						<p>{key}</p>
 						<p>{value}</p>

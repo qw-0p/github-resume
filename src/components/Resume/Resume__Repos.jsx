@@ -1,12 +1,15 @@
 import React from 'react'
 
-export const Repos = () => {
+export const Repos = ({ repos }) => {
+	console.log(repos);
+	
 	return (
 		<div>{
-			[].map((repo, index) => (
-				<div key={index} className='resume__repository'>
-					<p>{repo.name}</p>
-					<a href={repo.link} target='_blank' rel='noreferrer'>Link</a>
+			repos.map((repo, index) => (
+				<div key={index}>
+					<a href={repo.link} target='_blank' rel='noreferrer'>{repo.name}</a>
+					<p>Created At:{repo.created}</p>
+					<p>Updated At:{repo.updated}</p>
 				</div>
 			))
 		}</div>
