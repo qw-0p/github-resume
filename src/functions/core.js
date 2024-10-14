@@ -46,7 +46,7 @@ export class Core {
 				return JSON.parse(localStorage.getItem(`${this.username}-languages`))
 			}
 			let languageStats = {};
-			if (this.repositories.length === 0) return null;
+			if (this.repositories.length === 0) return {};
 
 			const languagePromises = this.repositories.map(repo =>
 				request(`/repos/${this.username}/${repo.name}/languages`)
@@ -63,6 +63,9 @@ export class Core {
 				}
 			});
 			localStorage.setItem(`${this.username}-languages`, JSON.stringify(languageStats))
+
+			console.log(languageStats);
+			
 			return languageStats
 		} catch (error) {
 			console.error("Error:", error);

@@ -1,10 +1,8 @@
 import {useEffect, useMemo, useState} from 'react'
 import { useLocation } from 'react-router-dom'
-import { Header } from './Resume__Header'
-import { Profile } from './Resume__Profile'
-import { Repos } from './Resume__Repos'
-import { Languages } from './Resume__Languages'
+import { Header, Repos, Languages } from './components'
 import { Core } from '../../functions'
+import './style.scss'
 
 export const Resume = () => {
 	const [error, setError] = useState(false)
@@ -16,11 +14,10 @@ export const Resume = () => {
 	const location = useLocation()
 	const core = useMemo(() => new Core(location.pathname.slice(1)), [location.pathname])
 
-
-
-
 	useEffect(() => {
 		const fetchData = async () => {
+
+			//I dont use promise.all/allSettled because I need to catch every errors
 			try {
 				const user = await core.getUser();
 				setData(prev => ({ ...prev, user }));
@@ -50,10 +47,6 @@ export const Resume = () => {
 		<div className='resume'>
 			<section className='resume__header'>
 				<Header {...data.user} />
-			</section>
-			<section className='resume__profile'>
-				<Profile {...data.user} />
-
 			</section>
 			<section className='resume__languages'>
 				<Languages languages={data.languages} />
