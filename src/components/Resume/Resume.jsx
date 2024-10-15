@@ -2,7 +2,7 @@ import {useEffect, useMemo, useState} from 'react'
 import { useLocation } from 'react-router-dom'
 import { Header, Repos, Languages } from './components'
 import { Core } from '../../functions'
-import './style.scss'
+import { Box, Container } from '@mui/material'
 
 export const Resume = () => {
 	const [error, setError] = useState(false)
@@ -11,6 +11,7 @@ export const Resume = () => {
 		repos: [],
 		languages: [],	
 	})
+	const [loading, setLoading] = useState(false)
 	const location = useLocation()
 	const core = useMemo(() => new Core(location.pathname.slice(1)), [location.pathname])
 
@@ -44,16 +45,16 @@ export const Resume = () => {
 	}
 
 	return (
-		<div className='resume'>
-			<section className='resume__header'>
+		<Container fixed disableGutters className='resume'>
+			<Box>
 				<Header {...data.user} />
-			</section>
-			<section className='resume__languages'>
+			</Box>
+			<Box>
 				<Languages languages={data.languages} />
-			</section>
-			<section className='resume__repositories'>
+			</Box>
+			<Box>
 				<Repos repos={data.repos} />
-			</section>
-		</div>
+			</Box>
+		</Container>
 	)
 }

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import './style.scss'
+
 import { Box, Button, Container, Input } from "@mui/material";
 
 export const Home = () => {
@@ -13,13 +13,11 @@ export const Home = () => {
 
 
 	return (
-		<Container fixed className='home' disableGutters>
+		<Container className='home'>
 			<Box>
 			<h1>GitHub Resume</h1>
 				<p>Enter your details to view your resume</p>
-			</Box>
 			<form className='home__form' onSubmit={handleOnSubmit}>
-				<Box >
 				<Input
 					size="large"
 					className='home__input'
@@ -27,9 +25,9 @@ export const Home = () => {
 					name='username'
 					placeholder='Search resume'
 				/>
-					<Button variant="contained" className='home__button'>Search</Button>
-				</Box>
-			</form>
+					<Button variant="contained" type='submit' className='home__button'>Search</Button>
+				</form>
+			</Box>
 		</Container>
 	)
 }

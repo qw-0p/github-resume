@@ -64,9 +64,8 @@ export class Core {
 			});
 			localStorage.setItem(`${this.username}-languages`, JSON.stringify(languageStats))
 
-			console.log(languageStats);
 			
-			return languageStats
+			return languageStats;
 		} catch (error) {
 			console.error("Error:", error);
 		}
